@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Food Shop | LogicBank</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #000;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+  }
+  header {
+    background: #111;
+    padding: 15px 0;
+    text-align: center;
+    border-bottom: 2px solid gold;
+  }
+  header h1 {
+    font-size: 1.8rem;
+    color: gold;
+  }
+  .balance {
+    background: #111;
+    color: #00ffff;
+    text-align: center;
+    padding: 15px;
+    font-size: 18px;
+    border-bottom: 2px solid #00ffff;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    padding: 20px;
+  }
+  .card {
+    background: rgba(0,255,255,0.05);
+    border: 2px solid #00ffff;
+    border-radius: 15px;
+    text-align: center;
+    padding: 15px;
+    transition: 0.3s;
+  }
+  .card:hover {
+    box-shadow: 0 0 20px #00ffff;
+    transform: translateY(-5px);
+  }
+  .card img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  .card h4 {
+    margin: 5px 0;
+    color: gold;
+    font-size: 1rem;
+  }
+  .card p {
+    margin: 0;
+    font-weight: bold;
+    color: #00ffff;
+  }
+  .card button {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: gold;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .card button:hover {
+    background: #fff200;
+  }
+
+  /* Cart Summary */
+  .cart-summary {
+    background: #111;
+    margin: 15px 20px;
+    padding: 15px;
+    border: 2px solid #00ffff;
+    border-radius: 15px;
+    display: none;
+  }
+  .cart-summary h3 {
+    margin: 0 0 10px 0;
+    color: gold;
+    font-size: 1.1rem;
+  }
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+    color: #00ffff;
+  }
+  .cart-total {
+    margin-top: 10px;
+    font-weight: bold;
+    color: white;
+  }
+
+  /* Checkout Button */
+  .checkout {
+    text-align: center;
+    margin: 20px 0;
+  }
+  .checkout button {
+    padding: 12px 25px;
+    background: gold;
+    color: #000;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .checkout button:hover {
+    background: #fff200;
+  }
+
+  /* Receipt */
+  .receipt {
+    background: #111;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 400px;
+    border: 2px solid #00ffff;
+    padding: 20px;
+    border-radius: 15px;
+    display: none;
+  }
+  .receipt h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: gold;
+  }
+  .receipt-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+    color: #00ffff;
+  }
+  .receipt-total {
+    border-top: 1px dashed #00ffff;
+    margin-top: 10px;
+    padding-top: 10px;
+    font-weight: bold;
+    color: white;
+  }
+
+  /* Bottom Navigation */
+  nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #111;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-top: 2px solid gold;
+  }
+  nav a {
+    color: #00ffff;
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+  nav a:hover {
+    color: gold;
+    transform: scale(1.2);
+  }
+
+  @media (max-width: 500px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<header>
+  <h1><i class="fas fa-utensils"></i> Food Shop</h1>
+</header>
+
+<div class="balance" id="balance">Balance: R450,000</div>
+
+<section class="grid" id="foodGrid"></section>
+
+<div class="cart-summary" id="cartSummary">
+  <h3><i class="fas fa-shopping-cart"></i> Cart Summary</h3>
+  <div id="cartItems"></div>
+  <div class="cart-total" id="cartTotal"></div>
+</div>
+
+<div class="checkout">
+  <button onclick="checkout()">Pay All</button>
+</div>
+
+<div class="receipt" id="receipt">
+  <h3><i class="fas fa-receipt"></i> Transaction Receipt</h3>
+  <div id="receiptItems"></div>
+  <div class="receipt-total" id="receiptTotal"></div>
+</div>
+
+<nav>
+  <a href="dashboard.html"><i class="fas fa-home"></i></a>
+  <a href="pay-beneficiary.html"><i class="fas fa-user-check"></i></a>
+  <a href="shop.html"><i class="fas fa-shopping-cart"></i></a>
+</nav>
+
+<script>
+  let balance = 450000;
+  const cart = [];
+
+  const items = [
+    { name: "Nando's", price: 250, image: "Nandos.jpg" },
+    { name: "KFC 10pc", price: 300, image: "KFC.jpg" },
+    { name: "Debonairs Pizza", price: 70, image: "Romans.jpg" },
+    { name: "Wimpy Burger", price: 130, image: "Wimpy.png" },
+    { name: "Chicken Licken", price: 210, image: "Licken.jpg" },
+    { name: "Steers", price: 120, image: "Steers.jpg" },
+    { name: "Roman's Pizza", price: 150, image: "roman.jpg" },
+    { name: "McDonald's", price: 120, image: "Mcdonalds.jpg" },
+    { name: "Hungry Lion", price: 90, image: "Hungry.jpg" },
+    { name: "Coca-Cola 1L", price: 24, image: "Coke1l.webp" },
+    { name: "Sprite 1L", price: 25, image: "Sprite-1-25lt.jpg" },
+    { name: "Sprite 440ml", price: 15, image: "Sprite.jpg" },
+    { name: "Coke 440ml", price: 17, image: "Coke.png" },
+    { name: "Fanta", price: 18, image: "Fanta.jpg" },
+    { name: "Stoney", price: 19, image: "Stoney.jpg" }
+  ];
+
+  function renderGrid() {
+    const grid = document.getElementById("foodGrid");
+    items.forEach((item, index) => {
+      const div = document.createElement("div");
+      div.className = "card";
+      div.innerHTML = `
+        <img src="${item.image}" alt="${item.name}">
+        <h4>${item.name}</h4>
+        <p>R${item.price}</p>
+        <button onclick="addToCart(${index})"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+      `;
+      grid.appendChild(div);
+    });
+  }
+
+  function addToCart(index) {
+    cart.push(items[index]);
+    updateCartSummary();
+    alert(`${items[index].name} added to cart.`);
+  }
+
+  function updateCartSummary() {
+    const cartSummary = document.getElementById("cartSummary");
+    const cartItems = document.getElementById("cartItems");
+    const cartTotal = document.getElementById("cartTotal");
+
+    cartItems.innerHTML = "";
+    let total = 0;
+    cart.forEach((item) => {
+      const div = document.createElement("div");
+      div.className = "cart-item";
+      div.innerHTML = `<span>${item.name}</span><span>R${item.price}</span>`;
+      cartItems.appendChild(div);
+      total += item.price;
+    });
+
+    cartTotal.textContent = `Total: R${total}`;
+    cartSummary.style.display = cart.length > 0 ? "block" : "none";
+  }
+
+  function checkout() {
+    if (cart.length === 0) return alert("Cart is empty!");
+
+    let total = cart.reduce((sum, item) => sum + item.price, 0);
+    if (total > balance) return alert("Insufficient balance.");
+
+    balance -= total;
+    document.getElementById("balance").textContent = `Balance: R${balance}`;
+
+    const receipt = document.getElementById("receipt");
+    const receiptItems = document.getElementById("receiptItems");
+    const receiptTotal = document.getElementById("receiptTotal");
+
+    receiptItems.innerHTML = "";
+    cart.forEach(item => {
+      const div = document.createElement("div");
+      div.className = "receipt-item";
+      div.innerHTML = `<span>${item.name}</span><span>R${item.price}</span>`;
+      receiptItems.appendChild(div);
+    });
+
+    receiptTotal.textContent = `Total Paid: R${total}`;
+    receipt.style.display = "block";
+    cart.length = 0;
+    updateCartSummary();
+  }
+
+  renderGrid();
+</script>
+
+</body>
+</html>

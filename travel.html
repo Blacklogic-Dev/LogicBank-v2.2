@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LogicBank | Bank Travel</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #001f3f, #0f0f5e);
+    color: white;
+  }
+  header {
+    text-align: center;
+    padding: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: gold;
+  }
+  .flight-logo {
+    font-size: 80px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    color: gold;
+  }
+  .travel-section {
+    padding: 20px;
+  }
+  .travel-section h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: gold;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    transition: transform 0.3s, background 0.3s;
+    cursor: pointer;
+  }
+  .card:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+  }
+  .card i {
+    font-size: 50px;
+    margin-bottom: 10px;
+    color: gold;
+  }
+  .card p {
+    font-size: 16px;
+    margin: 5px 0;
+  }
+  .caution {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #ccc;
+  }
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #001f3f;
+    display: flex;
+    justify-content: space-around;
+    padding: 0.8rem 0;
+    color: white;
+  }
+  .footer i {
+    font-size: 1.4rem;
+  }
+  @media(max-width:600px){
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .flight-logo {
+      font-size: 60px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>LogicBank Travel</header>
+<div class="flight-logo"><i class="fas fa-plane-departure"></i></div>
+
+<div class="travel-section">
+  <h2>Flights (FlightWorld)</h2>
+  <div class="grid">
+    <div class="card" onclick="alert('Domestic flight info via FlightWorld')">
+      <i class="fas fa-plane"></i>
+      <p>Domestic Flight</p>
+    </div>
+    <div class="card" onclick="alert('International flight info via FlightWorld')">
+      <i class="fas fa-globe"></i>
+      <p>International Flight</p>
+    </div>
+  </div>
+  <div class="caution">
+    ⚠️ For all flight updates & schedules, contact FlightWorld.
+  </div>
+</div>
+
+<div class="travel-section">
+  <h2>City-to-City Travel (CityTravel)</h2>
+  <div class="grid">
+    <div class="card" onclick="alert('Train info via CityTravel')">
+      <i class="fas fa-train"></i>
+      <p>Train Travel</p>
+    </div>
+    <div class="card" onclick="alert('Bus info via CityTravel')">
+      <i class="fas fa-bus"></i>
+      <p>Bus Travel</p>
+    </div>
+    <div class="card" onclick="alert('Ferry info via CityTravel')">
+      <i class="fas fa-ship"></i>
+      <p>Ferry/Cruise</p>
+    </div>
+  </div>
+  <div class="caution">
+    ⚠️ For city-to-city schedules & bookings, contact CityTravel.
+  </div>
+</div>
+
+<div class="footer">
+  <i class="fas fa-home"></i>
+  <i class="fas fa-history"></i>
+  <i class="fas fa-qrcode"></i>
+  <i class="fas fa-credit-card"></i>
+</div>
+
+</body>
+</html>

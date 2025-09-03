@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LogicBank Marketplace</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+  body { background: #0a0f1c; color: #fff; padding-bottom: 80px; }
+
+  header { text-align: center; padding: 20px; background: #1a1a1a; }
+  header h1 { color: #00bfff; font-size: 2rem; }
+
+  /* Tabs */
+  .tabs { display: flex; justify-content: center; margin: 20px 0; }
+  .tab { padding: 10px 20px; cursor: pointer; border-radius: 8px; margin: 0 5px; background: #111; transition: 0.3s; }
+  .tab.active { background: #00bfff; color: #000; }
+  .tab:hover { background: #00a0e6; }
+
+  /* Grids */
+  .grid { display: none; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 20px; }
+  .grid.active { display: grid; }
+
+  .card { background: #1a1f2f; border-radius: 16px; overflow: hidden; box-shadow: 0 0 10px #00bfff88; transition: transform 0.3s; text-align: center; }
+  .card:hover { transform: scale(1.03); }
+
+  .card img { width: 100%; height: 200px; object-fit: cover; }
+
+  .card-content { padding: 15px; }
+  .card-title { font-size: 1.2rem; font-weight: bold; color: #00bfff; margin-bottom: 8px; }
+  .card-price { font-size: 1rem; color: #0f0; font-weight: bold; margin-bottom: 10px; }
+
+  .btn-view { background-color: #00bfff; color: #000; padding: 10px; width: 100%; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; }
+  .btn-view:hover { background-color: #00a0e6; }
+
+  /* Bottom Navigation */
+  nav { position: fixed; bottom: 0; left: 0; right: 0; background: #111; display: flex; justify-content: space-around; padding: 10px 0; border-top: 2px solid gold; }
+  nav a { color: #00ffff; font-size: 1.5rem; text-decoration: none; transition: 0.3s; }
+  nav a:hover { color: gold; transform: scale(1.2); }
+
+  /* Responsive */
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1><i class="fas fa-store"></i> LogicBank Marketplace</h1>
+</header>
+
+<div class="tabs">
+  <div class="tab active" data-target="cars-grid"><i class="fas fa-car"></i> Cars</div>
+  <div class="tab" data-target="houses-grid"><i class="fas fa-house"></i> Houses</div>
+</div>
+
+<!-- Cars Grid -->
+<div class="grid active" id="cars-grid">
+  <div class="card">
+    <img src="Golf.jpg" alt="Golf 8R">
+    <div class="card-content">
+      <div class="card-title">Golf 8R</div>
+      <div class="card-price">R800,000</div>
+      <button class="btn-view"><i class="fas fa-eye"></i> View Details</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="C63s.jpg" alt="C63s Coupe">
+    <div class="card-content">
+      <div class="card-title">C63s Coupe</div>
+      <div class="card-price">R1,600,000</div>
+      <button class="btn-view"><i class="fas fa-eye"></i> View Details</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="Legend50.jpg" alt="Legend 50">
+    <div class="card-content">
+      <div class="card-title">Legend 50</div>
+      <div class="card-price">R900,000</div>
+      <button class="btn-view"><i class="fas fa-eye"></i> View Details</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="Raptor.jpg" alt="Ford Raptor">
+    <div class="card-content">
+      <div class="card-title">Ford Raptor</div>
+      <div class="card-price">R1,200,000</div>
+      <button class="btn-view"><i class="fas fa-eye"></i> View Details</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="Toyota.jpg" alt="Toyota Avanza">
+    <div class="card-content">
+      <div class="card-title">Toyota Rumion</div>
+      <div class="card-price">R460,000</div>
+      <button class="btn-view"><i class="fas fa-eye"></i> View Details</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="Kwid.jpg" alt="Kwid Triber">
+    <div class="card-content">
+      <div class="card-title">Kwid Triber</div>
+      <div class="card-price">R220,000</div>
+      <button class="btn-view"><i class="fas fa-eye"></i> View Details</button>
+    </div>
+  </div>
+</div>
+
+<!-- Houses Grid -->
+<div class="grid" id="houses-grid">
+  <div class="card">
+    <img src="Fancy.jpg" alt="Luxury Mansion">
+    <div class="card-content">
+      <div class="card-title">Luxury Mansion</div>
+      <div class="card-price">R2,500,000</div>
+      <button class="btn-view"><i class="fas fa-eye"></i> View Details</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="Modern.jpg" alt="Modern Family Home">
+    <div class="card-content">
+      <div class="card-title">Modern Family Home</div>
+      <div class="card-price">R1,800,000</div>
+      <button class="btn-view"><i class="fas fa-eye"></i> View Details</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="Villa.jpg" alt="Farm Style Villa">
+    <div class="card-content">
+      <div class="card-title">Farm Style Villa</div>
+      <div class="card-price">R1,200,000</div>
+      <button class="btn-view"><i class="fas fa-eye"></i> View Details</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="Ocean.jpg" alt="Ocean View House">
+    <div class="card-content">
+      <div class="card-title">Ocean View House</div>
+      <div class="card-price">R3,000,000</div>
+      <button class="btn-view"><i class="fas fa-eye"></i> View Details</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="Luxury.jpg" alt="Luxury Apartment">
+    <div class="card-content">
+      <div class="card-title">Luxury Apartment</div>
+      <div class="card-price">R850,000</div>
+      <button class="btn-view"><i class="fas fa-eye"></i> View Details</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="Cabins.webp" alt="Countryside Cabin">
+    <div class="card-content">
+      <div class="card-title">Countryside Cabin</div>
+      <div class="card-price">R650,000</div>
+      <button class="btn-view"><i class="fas fa-eye"></i> View Details</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="City.jpg" alt="City Loft">
+    <div class="card-content">
+      <div class="card-title">City Loft</div>
+      <div class="card-price">R980,000</div>
+      <button class="btn-view"><i class="fas fa-eye"></i> View Details</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="Suburban.jpg" alt="Suburban Duplex">
+    <div class="card-content">
+      <div class="card-title">Suburban Duplex</div>
+      <div class="card-price">R1,100,000</div>
+      <button class="btn-view"><i class="fas fa-eye"></i> View Details</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="Tiny.jpg" alt="Tiny Smart Home">
+    <div class="card-content">
+      <div class="card-title">Tiny Smart Home</div>
+      <div class="card-price">R350,000</div>
+      <button class="btn-view"><i class="fas fa-eye"></i> View Details</button>
+    </div>
+  </div>
+</div>
+
+<!-- Note -->
+<div style="text-align:center; margin:30px; color:#ccc;">🔒 This is window shopping only. No purchases available yet.</div>
+
+<!-- Bottom Navigation -->
+<nav>
+  <a href="dashboard.html"><i class="fas fa-home"></i></a>
+  <a href="shop.html"><i class="fas fa-car"></i></a>
+  
+  <a href="track.html"><i class="fas fa-wallet"></i></a>
+</nav>
+
+<script>
+  // Tab switching
+  const tabs = document.querySelectorAll('.tab');
+  const grids = document.querySelectorAll('.grid');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      grids.forEach(g => g.classList.remove('active'));
+      document.getElementById(tab.dataset.target).classList.add('active');
+    });
+  });
+
+  // View Details alert
+  const buttons = document.querySelectorAll('.btn-view');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      alert("Purchase not available yet. This is a window shopping experience only.");
+    });
+  });
+</script>
+
+</body>
+</html>

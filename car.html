@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LogicBank | Cars</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+    }
+
+    header {
+      background: #1a1a1a;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 30px;
+    }
+
+    .car-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      padding: 20px;
+    }
+
+    .car-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .car-card h2 {
+      font-size: 1.2rem;
+      margin: 15px 0 5px;
+    }
+
+    .car-card p {
+      color: green;
+      font-weight: bold;
+      margin: 0 0 10px;
+    }
+
+    .btn {
+      background: #0077ff;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: #0055cc;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🚗 LogicBank | Cars Window Shopping</h1>
+</header>
+
+<div class="grid">
+
+  <div class="car-card">
+    <img src="Golf.jpg" alt="Golf 8R">
+    <h2>Golf 8R</h2>
+    <p>R800,000</p>
+    <button class="btn">View Details</button>
+  </div>
+
+  <div class="car-card">
+    <img src="C63s.jpg" alt="C63s Coupe">
+    <h2>C63s Coupe</h2>
+    <p>R1,600,000</p>
+    <button class="btn">View Details</button>
+  </div>
+
+  <div class="car-card">
+    <img src="Legend50.jpg" alt="Legend 50">
+    <h2>Legend 50</h2>
+    <p>R900,000</p>
+    <button class="btn">View Details</button>
+  </div>
+
+  <div class="car-card">
+    <img src="Raptor.jpg" alt="Ford Raptor">
+    <h2>Ford Raptor</h2>
+    <p>R1,200,000</p>
+    <button class="btn">View Details</button>
+  </div>
+
+  <div class="car-card">
+    <img src="Toyota.jpg" alt="Toyota Avanza">
+    <h2>Toyota Rumion</h2>
+    <p>R460,000</p>
+    <button class="btn">View Details</button>
+  </div>
+
+  <div class="car-card">
+    <img src="Kwid.jpg" alt="Kwid Triber">
+    <h2>Kwid Triber</h2>
+    <p>R220,000</p>
+    <button class="btn">View Details</button>
+  </div>
+
+</div>
+
+</body>
+</html>

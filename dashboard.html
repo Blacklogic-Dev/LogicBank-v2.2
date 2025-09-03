@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LogicBank Dashboard</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  * { box-sizing:border-box; margin:0; padding:0; font-family:'Segoe UI', sans-serif; }
+  body { background:#000; color:#fff; padding:20px; }
+
+  /* Header */
+  header { display:flex; flex-direction:column; align-items:center; margin-bottom:30px; }
+  .logo { height:80px; filter: drop-shadow(0 0 20px #00f0ff); margin-bottom:15px; }
+  .welcome { font-size:1.5rem; color:#00ffff; margin-bottom:20px; }
+
+  /* Wallet List */
+  .wallet-list { display:flex; flex-direction:column; gap:15px; margin-bottom:30px; }
+  .wallet-card {
+    display:flex; align-items:center;
+    background: rgba(0,255,255,0.05);
+    border:2px solid #00ffff;
+    border-radius:15px;
+    padding:15px 20px;
+    transition:0.3s;
+  }
+  .wallet-card:hover { box-shadow:0 0 20px #00ffff; transform:translateY(-3px); }
+  .wallet-card i { font-size:2rem; color:gold; margin-right:15px; min-width:40px; text-align:center; }
+  .wallet-card .currency-name { flex:1; color:#00ffff; font-weight:bold; font-size:1.1rem; }
+  .wallet-card .amount { font-weight:bold; font-size:1.2rem; color:white; }
+
+  /* Currency Ticker */
+  .currency-scroll { overflow:hidden; white-space:nowrap; border-top:2px solid #00ffff; border-bottom:2px solid #00ffff; padding:10px; margin-bottom:20px; }
+  .currency-scroll p { display:inline-block; padding-left:100%; animation:scroll-left 15s linear infinite; color:#00ffff; font-weight:bold; }
+  @keyframes scroll-left { 0%{ transform:translateX(0); } 100%{ transform:translateX(-100%); } }
+
+  /* Action Buttons */
+  .actions { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:15px; margin-bottom:30px; }
+  .action-button {
+    background: gold;
+    color:#000;
+    border:none;
+    border-radius:15px;
+    padding:15px;
+    text-align:center;
+    cursor:pointer;
+    transition:0.3s;
+    position:relative;
+    overflow:hidden;
+    text-decoration:none;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .action-button i { font-size:1.5rem; margin-bottom:5px; display:block; color:#000; }
+  .action-button:hover { background:#fff200; box-shadow:0 0 15px #00ffff; transform:scale(1.05); text-decoration:none; color:#000; }
+
+  /* Footer Nav */
+  nav { position:fixed; bottom:0; left:0; right:0; background:#111; display:flex; justify-content:space-around; padding:10px; border-top:2px solid gold; }
+  nav a { color:#00ffff; font-size:1.5rem; text-decoration:none; transition:0.3s; }
+  nav a:hover { color:gold; transform:scale(1.2); }
+
+</style>
+</head>
+<body>
+
+<header>
+
+  <div class="welcome">Welcome Back, Mthokozisi!</div>
+</header>
+
+<!-- Wallet List -->
+<div class="wallet-list">
+  <div class="wallet-card">
+    <i class="fas fa-wallet"></i>
+    <div class="currency-name">Rands</div>
+    <div class="amount">R450,000</div>
+  </div>
+  <div class="wallet-card">
+    <i class="fas fa-dollar-sign"></i>
+    <div class="currency-name">Dollars</div>
+    <div class="amount">$24,705.20</div>
+  </div>
+  <div class="wallet-card">
+    <i class="fas fa-euro-sign"></i>
+    <div class="currency-name">Euros</div>
+    <div class="amount">€21,628.04</div>
+  </div>
+</div>
+
+<!-- Currency Ticker -->
+<div class="currency-scroll">
+  <p>$1 = R18.50 | £1 = R22.30 | $1 = €0.85 | £ = €1.10</p>
+</div>
+
+<!-- Action Buttons -->
+<div class="actions">
+  <a href="travel.html" class="action-button">
+    <i class="fas fa-plane"></i> Bank Travel
+  </a>
+  <a href="food.html" class="action-button">
+    <i class="fas fa-hamburger"></i> Purchase
+  </a>
+  <a href="pay.html" class="action-button">
+    <i class="fas fa-user-check"></i> Pay Beneficiary
+  </a>
+  <a href="shop.html" class="action-button">
+    <i class="fas fa-shopping-cart"></i> Window Shop Dream
+  </a>
+  <a href="track.html" class="action-button">
+    <i class="fas fa-route"></i> Track Money
+  </a>
+  <a href="money.html" class="action-button">
+    <i class="fas fa-money-bill-wave"></i> Make Money
+  </a>
+</div>
+
+<!-- Footer Nav -->
+<nav>
+  <a href="track.html"><i class="fas fa-money-check-alt"></i></a>
+  <a href="code.html"><i class="fas fa-qrcode"></i></a>
+  <a href="virtual.html"><i class="fas fa-credit-card"></i></a>
+</nav>
+
+</body>
+</html>

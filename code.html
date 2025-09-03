@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LogicBank | QR & Barcode Generator</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:'Roboto', sans-serif; }
+  body {
+    background: linear-gradient(to right, #000000, #0f0f5e);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh;
+  }
+
+  h1 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    color: gold;
+    text-shadow:0 0 8px gold;
+  }
+
+  .grid-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+  }
+
+  .option-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    text-align: center;
+    padding: 15px;
+    cursor: pointer;
+    transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+  }
+
+  .option-card:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 15px rgba(255,215,0,0.4);
+  }
+
+  .option-card i {
+    font-size: 2rem;
+    color: gold;
+    margin-bottom: 8px;
+  }
+
+  .option-card p {
+    font-size: 0.9rem;
+    font-weight: bold;
+  }
+
+  .form-group {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  label { margin-bottom: 5px; font-weight: bold; color: #00bfff; }
+  input, select, button {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+    outline: none;
+  }
+
+  input, select { margin-bottom: 15px; }
+  button {
+    background: linear-gradient(90deg, #ffd700, #ffb700);
+    font-weight: bold;
+    cursor: pointer;
+    transition:0.3s;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+  }
+  button:hover {
+    background: linear-gradient(90deg, #ffec70, #ffd700);
+    box-shadow:0 4px 10px rgba(255,215,0,0.5);
+  }
+
+  .output {
+    margin-top: 20px;
+    text-align:center;
+    width:100%;
+  }
+
+  canvas, svg {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 8px;
+    background:white;
+    max-width:100%;
+  }
+</style>
+</head>
+<body>
+
+<h1>Generate Payment QR & Barcode</h1>
+
+<!-- Payment Options Grid -->
+<div class="grid-options">
+  <div class="option-card" onclick="selectCategory('Fast Food')">
+    <i class="fas fa-hamburger"></i>
+    <p>Fast Food</p>
+  </div>
+  <div class="option-card" onclick="selectCategory('Groceries')">
+    <i class="fas fa-shopping-basket"></i>
+    <p>Groceries</p>
+  </div>
+  <div class="option-card" onclick="selectCategory('Electricity')">
+    <i class="fas fa-bolt"></i>
+    <p>Electricity</p>
+  </div>
+  <div class="option-card" onclick="selectCategory('Digital Product')">
+    <i class="fas fa-laptop-code"></i>
+    <p>Digital Product</p>
+  </div>
+  <div class="option-card" onclick="selectCategory('Transport')">
+    <i class="fas fa-bus"></i>
+    <p>Transport</p>
+  </div>
+  <div class="option-card" onclick="selectCategory('Other')">
+    <i class="fas fa-wallet"></i>
+    <p>Other</p>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="purchase">What is being purchased?</label>
+  <input type="text" id="purchase" placeholder="e.g. Burger Meal" />
+</div>
+
+<div class="form-group">
+  <label for="amount">Amount (R)</label>
+  <input type="number" id="amount" placeholder="e.g. 85.00" />
+</div>
+
+<div class="form-group">
+  <label for="category">Category</label>
+  <select id="category">
+    <option>Fast Food</option>
+    <option>Groceries</option>
+    <option>Electricity</option>
+    <option>Digital Product</option>
+    <option>Transport</option>
+    <option>Other</option>
+  </select>
+</div>
+
+<button onclick="generateCodes()"><i class="fas fa-qrcode"></i> Generate Codes</button>
+
+<div class="output">
+  <div id="qr"></div>
+  <svg id="barcode"></svg>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+<script>
+function selectCategory(cat) {
+  document.getElementById('category').value = cat;
+}
+
+function generateCodes() {
+  const purchase = document.getElementById("purchase").value;
+  const amount = document.getElementById("amount").value;
+  const category = document.getElementById("category").value;
+  const qrData = `Item: ${purchase}, Amount: R${amount}, Category: ${category}`;
+
+  // Generate QR Code
+  document.getElementById("qr").innerHTML = "";
+  QRCode.toCanvas(document.createElement("canvas"), qrData, function (error, canvas) {
+    if (error) console.error(error);
+    else document.getElementById("qr").appendChild(canvas);
+  });
+
+  // Generate Barcode
+  JsBarcode("#barcode", `${purchase}-${amount}`, {
+    format: "CODE128",
+    lineColor: "#000000",
+    background: "white",
+    displayValue: true,
+    fontOptions: "bold",
+    fontSize: 18
+  });
+}
+</script>
+
+</body>
+</html>

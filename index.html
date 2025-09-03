@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LogicBank v2.2</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #000;
+      color: gold;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    /* Neural Network Background */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(circle at center, rgba(0,240,255,0.2) 0%, transparent 70%);
+      background-size: 300% 300%;
+      animation: bgMove 10s infinite linear;
+      z-index: -1;
+    }
+
+    @keyframes bgMove {
+      0% { background-position: 0% 0%; }
+      50% { background-position: 100% 100%; }
+      100% { background-position: 0% 0%; }
+    }
+
+    header img {
+      width: 250px;
+      border-radius: 25px;
+      margin: 20px auto;
+      display: block;
+      filter: drop-shadow(0 0 25px #00f0ff);
+      animation: floatLogo 3s ease-in-out infinite;
+    }
+
+    @keyframes floatLogo {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+
+    h1 {
+      font-size: 2.3rem;
+      color: gold;
+      text-shadow: 0 0 15px #00f0ff;
+      margin-bottom: 40px;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00f0ff; }
+      to { text-shadow: 0 0 30px gold; }
+    }
+
+    /* Buttons Grid 2x3 */
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 20px;
+      padding: 0 20px;
+      margin-bottom: 60px;
+    }
+
+    .button {
+      background: rgba(255,255,255,0.05);
+      border: 2px solid;
+      border-radius: 20px;
+      padding: 20px 15px;
+      color: gold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .button.electric { border-color: #00f0ff; color: #00f0ff; }
+    .button.gold { border-color: gold; color: gold; }
+
+    .button:hover i {
+      transform: scale(1.5);
+      transition: transform 0.3s ease;
+    }
+
+    .button:hover {
+      transform: scale(1.1) rotate(1deg);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+    }
+
+    /* Footer */
+    .footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      padding: 15px;
+      background: rgba(0,0,0,0.8);
+    }
+
+    .sign-in-btn {
+      width: 100%;
+      background: linear-gradient(90deg, #00f0ff, gold);
+      color: #000;
+      padding: 15px;
+      border: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #00f0ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    /* Modal / Card */
+    .card {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 350px;
+      background: #111;
+      color: #fff;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 0 30px #00f0ff;
+      z-index: 999;
+      text-align: left;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .card i {
+      font-size: 28px;
+      color: #00f0ff;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: gold;
+    }
+
+    .card p {
+      margin-bottom: 10px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 20px;
+      background: none;
+      border: none;
+      color: gold;
+      cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <img src="LogicBank2.0.png" alt="LogicBank Logo" />
+  </header>
+  <main>
+    <h1>Welcome to LogicBank v2.2 — Save Smart. Grow Start.</h1>
+    <div class="buttons">
+      <div class="button electric" onclick="openCard('bank')"><i class="fas fa-university"></i> Bank Transfer</div>
+      <div class="button gold" onclick="openCard('purchase')"><i class="fas fa-shopping-cart"></i> Purchase</div>
+      <div class="button electric" onclick="openCard('beneficiary')"><i class="fas fa-user-friends"></i> Pay Beneficiary</div>
+      <div class="button gold" onclick="openCard('shop')"><i class="fas fa-store"></i> Shop Online</div>
+      <div class="button electric" onclick="openCard('track')"><i class="fas fa-map-marker-alt"></i> Track Money</div>
+      <div class="button gold" onclick="openCard('invest')"><i class="fas fa-coins"></i> Make Money</div>
+    </div>
+  </main>
+
+  <div class="footer">
+    <a href="signin.html">
+      <button class="sign-in-btn"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+    </a>
+  </div>
+
+  <!-- Cards for each button -->
+  <div class="card" id="bank">
+    <button class="close-btn" onclick="closeCard('bank')">&times;</button>
+    <h3><i class="fas fa-university"></i> Bank Transfer</h3>
+    <p>Allow international bank transfer</p>
+  </div>
+
+  <div class="card" id="purchase">
+    <button class="close-btn" onclick="closeCard('purchase')">&times;</button>
+    <h3><i class="fas fa-shopping-cart"></i> Purchase</h3>
+    <p>Buy fast food within selected stores: KFC, McDonald's and more</p>
+  </div>
+
+  <div class="card" id="beneficiary">
+    <button class="close-btn" onclick="closeCard('beneficiary')">&times;</button>
+    <h3><i class="fas fa-user-friends"></i> Pay Beneficiary</h3>
+    <p>Pay anyone anytime instantly</p>
+  </div>
+
+  <div class="card" id="shop">
+    <button class="close-btn" onclick="closeCard('shop')">&times;</button>
+    <h3><i class="fas fa-store"></i> Shop Online</h3>
+    <p>See the price of your dream car and house in digital windows shopping</p>
+  </div>
+
+  <div class="card" id="track">
+    <button class="close-btn" onclick="closeCard('track')">&times;</button>
+    <h3><i class="fas fa-map-marker-alt"></i> Track Money</h3>
+    <p>See if the beneficiary is really paid on time</p>
+  </div>
+
+  <div class="card" id="invest">
+    <button class="close-btn" onclick="closeCard('invest')">&times;</button>
+    <h3><i class="fas fa-coins"></i> Make Money</h3>
+    <p>Invest in different platforms and earn more money</p>
+  </div>
+
+  <script>
+    function openCard(id) {
+      document.getElementById(id).style.display = 'block';
+    }
+
+    function closeCard(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+  </script>
+</body>
+</html>

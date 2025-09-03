@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LogicBank | Make Money</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif; }
+  body { background: linear-gradient(to right, #000000, #0f0f5e); color:white; padding-bottom:80px; }
+
+  header {
+    text-align:center; padding:20px; font-size:28px; font-weight:bold; color:gold;
+    text-shadow:0 0 10px gold;
+  }
+
+  .investment-options {
+    display:grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap:20px; padding:20px;
+  }
+
+  .option {
+    background-color: rgba(255,255,255,0.05);
+    padding:20px; border-radius:12px; text-align:center;
+    cursor:pointer; transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 10px rgba(255,215,0,0.2);
+  }
+  .option:hover {
+    background-color: rgba(255,255,255,0.15);
+    transform: scale(1.1);
+    box-shadow: 0 6px 14px rgba(255,215,0,0.4);
+  }
+  .option i {
+    font-size:40px; margin-bottom:10px; color:gold;
+    animation: float 2s infinite alternate;
+  }
+  .option p { font-size:16px; color:#fff; font-weight:bold; }
+
+  @keyframes float { 0%{transform:translateY(0);} 100%{transform:translateY(-5px);} }
+
+  .investment-form {
+    padding:20px; background-color: rgba(255,255,255,0.05); border-radius:12px; margin:20px;
+    box-shadow: 0 4px 12px rgba(0,191,255,0.2);
+  }
+  .investment-form h2 { color:gold; margin-bottom:15px; text-shadow:0 0 5px gold; }
+  .investment-form label { display:block; margin:10px 0 5px; }
+  .investment-form input, .investment-form select {
+    width:100%; padding:10px; border-radius:6px; border:none; margin-bottom:15px; background:rgba(255,255,255,0.1); color:white;
+  }
+  .investment-form input::placeholder { color: #ccc; }
+  .submit-btn {
+    background-color: gold; color:black; padding:10px 20px; border:none; border-radius:6px;
+    cursor:pointer; font-weight:bold; width:100%; transition:0.3s;
+  }
+  .submit-btn:hover { background:#ffd700; box-shadow:0 4px 12px rgba(255,215,0,0.5); }
+
+  .receipt {
+    margin:20px; padding:20px; background-color: rgba(255,255,255,0.05);
+    border-radius:12px; box-shadow:0 4px 12px rgba(0,191,255,0.2);
+  }
+  .receipt h3 { color:gold; margin-bottom:10px; }
+
+  /* Footer for navigation */
+  .footer {
+    position:fixed; bottom:0; left:0; right:0;
+    background:#1a1f2f; display:flex; justify-content:space-around;
+    padding:0.8rem 0; border-top:2px solid #00bfff;
+  }
+  .footer i { font-size:1.5rem; color:#00bfff; transition:0.3s; cursor:pointer; }
+  .footer i:hover { color: gold; transform:scale(1.2); }
+
+</style>
+</head>
+<body>
+
+<header>💰 Make Money</header>
+
+<div class="investment-options">
+  <div class="option"><i class="fab fa-bitcoin"></i><p>Bitcoin & Crypto</p></div>
+  <div class="option"><i class="fas fa-city"></i><p>Estate Investment</p></div>
+  <div class="option"><i class="fas fa-chart-line"></i><p>Shares</p></div>
+  <div class="option"><i class="fas fa-briefcase"></i><p>Ownership</p></div>
+  <div class="option"><i class="fas fa-coins"></i><p>Forex</p></div>
+  <div class="option"><i class="fas fa-hand-holding-dollar"></i><p>Mutual Funds</p></div>
+  <div class="option"><i class="fas fa-lightbulb"></i><p>Startups</p></div>
+  <div class="option"><i class="fas fa-building"></i><p>REITs</p></div>
+</div>
+
+<div class="investment-form">
+  <h2>Investment Form</h2>
+  <form>
+    <label for="name">Full Name</label>
+    <input type="text" id="name" placeholder="Enter your name">
+    <label for="idnumber">ID Number</label>
+    <input type="text" id="idnumber" placeholder="Enter your ID number">
+    <label for="amount">Amount to Invest</label>
+    <input type="number" id="amount" placeholder="e.g. 5000">
+    <label for="category">Investment Category</label>
+    <select id="category">
+      <option>Bitcoin & Crypto</option>
+      <option>Estate Investment</option>
+      <option>Shares</option>
+      <option>Ownership</option>
+      <option>Forex</option>
+      <option>Mutual Funds</option>
+      <option>Startups</option>
+      <option>REITs</option>
+    </select>
+    <label for="duration">Investment Duration (in months)</label>
+    <input type="number" id="duration" placeholder="e.g. 12">
+    <button class="submit-btn" type="button" onclick="generateReceipt()">Submit Investment</button>
+  </form>
+</div>
+
+<div class="receipt" id="receipt" style="display:none;">
+  <h3>Receipt</h3>
+  <p><strong>Name:</strong> <span id="r_name"></span></p>
+  <p><strong>ID:</strong> <span id="r_id"></span></p>
+  <p><strong>Category:</strong> <span id="r_cat"></span></p>
+  <p><strong>Amount Invested:</strong> R<span id="r_amt"></span></p>
+  <p><strong>Duration:</strong> <span id="r_dur"></span> months</p>
+  <p><strong>Estimated Return:</strong> R<span id="r_return"></span></p>
+  <p><strong>Return Date:</strong> <span id="r_date"></span></p>
+</div>
+
+<div class="footer">
+  <i class="fas fa-money-check-alt"></i>
+  <i class="fas fa-chart-line"></i>
+  <i class="fas fa-coins"></i>
+  <i class="fas fa-wallet"></i>
+</div>
+
+<script>
+function generateReceipt() {
+  const name = document.getElementById("name").value;
+  const id = document.getElementById("idnumber").value;
+  const amt = parseFloat(document.getElementById("amount").value);
+  const cat = document.getElementById("category").value;
+  const dur = parseInt(document.getElementById("duration").value);
+
+  const interestRate = 0.08; // 8% example
+  const returnAmount = (amt + (amt * interestRate * dur / 12)).toFixed(2);
+
+  const currentDate = new Date();
+  currentDate.setMonth(currentDate.getMonth() + dur);
+  const returnDate = currentDate.toDateString();
+
+  document.getElementById("r_name").innerText = name;
+  document.getElementById("r_id").innerText = id;
+  document.getElementById("r_cat").innerText = cat;
+  document.getElementById("r_amt").innerText = amt.toFixed(2);
+  document.getElementById("r_dur").innerText = dur;
+  document.getElementById("r_return").innerText = returnAmount;
+  document.getElementById("r_date").innerText = returnDate;
+
+  document.getElementById("receipt").style.display = "block";
+}
+</script>
+
+</body>
+</html>
